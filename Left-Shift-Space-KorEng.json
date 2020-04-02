@@ -1,0 +1,79 @@
+{
+  "title": "Left Shift + Space를 한/영 전환으로 사용",
+  "rules": [
+    {
+      "description": "Left Shift + Space to KO/EN Toggle on macOS",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.parallels.desktop",
+                "com.parallels.vm",
+                "com.parallels.desktop.console",
+                "com.parallels.winapp."
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200,
+            "basic.to_if_held_down_threshold_milliseconds": 200
+          },
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "key_code": "spacebar",
+              "modifiers": [
+                "left_control",
+                "left_option"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+        "description": "Left Shift + Space to KO/EN Toggle on Parallels",
+        "manipulators": [
+            {
+                "type": "basic",
+                "conditions": [
+                {
+                  "type": "frontmost_application_if",
+                  "bundle_identifiers": [
+                            "com.parallels.desktop",
+                            "com.parallels.vm",
+                            "com.parallels.desktop.console",
+                            "com.parallels.winapp."
+                        ]
+                    }
+                ],
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 200,
+                    "basic.to_if_held_down_threshold_milliseconds": 200
+                },
+                "from": {
+                    "key_code": "space",
+                    "modifiers": { "mandatory": [ "left_shift" ] }
+                },
+                "to_if_alone": [ { "key_code": "right_option" } ],
+                "to_if_held_down" : [
+                    {
+                        "key_code": "space",
+                        "modifiers": { "mandatory": [ "left_shift" ] }
+                    }
+                ]
+            }
+        ]
+    }
+  ]
+}
